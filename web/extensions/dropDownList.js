@@ -4,13 +4,12 @@
  * Represents a list of values.
   */
 
-define(['../override', 'jquery', '../utils', '../datasources/currencyDataSource'], function(override, $, utils, currencyDataSource) {
-
-    const listData = currencyDataSource.currencyCodesList;
+define(['../override', 'jquery', '../utils'], function(override, $, utils) {
 
     return {
         loadFirst: ['directinput'],
-        init: function(grid) {
+        init: function(grid, options) {
+            const listData = options.currencyCodes;
             override(grid, function($super) {
                 return {
                     renderCellContent: function(record, column, value) {
