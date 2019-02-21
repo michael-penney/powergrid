@@ -2,14 +2,17 @@
  * dropDownList extension.
  * Enabled when column type is 'DROP_DOWN_LIST'.
  * Represents a list of values.
-  */
+ *
+ * @option dataList
+ *
+ */
 
 define(['../override', 'jquery', '../utils'], function(override, $, utils) {
 
     return {
         loadFirst: ['directinput'],
         init: function(grid, options) {
-            const listData = options.currencyCodes;
+            const dataList = options.dataList;
             override(grid, function($super) {
                 return {
                     renderCellContent: function(record, column, value) {
@@ -51,7 +54,7 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
-                            listData.forEach(function(element) {
+                            dataList.forEach(function(element) {
                                 let option = document.createElement('option');
                                 option.setAttribute('value', element);
                                 option.textContent = element;
