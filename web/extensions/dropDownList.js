@@ -54,13 +54,15 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
-                            dataList.forEach(function(element) {
-                                let option = document.createElement('option');
-                                option.setAttribute('value', element);
-                                option.textContent = element;
-                                if (element === value) option.setAttribute('selected', 'true');
-                                dropDownList.appendChild(option);
-                            });
+                            if (dataList) {
+                                dataList.forEach(function(element) {
+                                    let option = document.createElement('option');
+                                    option.setAttribute('value', element);
+                                    option.textContent = element;
+                                    if (element === value) option.setAttribute('selected', 'true');
+                                    dropDownList.appendChild(option);
+                                });
+                            }
 
                             cellContent.appendChild(dropDownList);
                             return cellContent;
