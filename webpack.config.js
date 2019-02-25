@@ -1,19 +1,23 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
 
     devtool: 'source-map',
 
     entry: [
-          'babel-polyfill',
-          './web/index.js'
-        ],
+		'@babel/polyfill',
+		'./web/main.js'
+	],
+	externals: [nodeExternals({
+        whitelist: ['@babel/polyfill']
+    })],
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel'
+                loader: 'babel-loader'
             },
             {
                 test: /\.css$/,
@@ -25,16 +29,16 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                loader: 'html'
+                loader: 'html-loader'
             },
             {
                 test: /\.json/,
-                loader: 'json'
-            }]
+                loader: 'json-loader'
+            }
+        ]
     },
     resolve: {
-        modulesDirectories: ['web', 'node_modules'],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     output: {
         path: __dirname + '/dist',
