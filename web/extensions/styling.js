@@ -36,8 +36,7 @@ define(['../override'], function(override) {
         override(grid, function($super) {
             return {
                 renderCell: function(record, column, rowIdx, columnIdx) {
-                    var cell = $super.renderCell.apply(this, arguments),
-                        oldClasses, oldClassUnparsed, oldStyles;
+                    var cell = $super.renderCell.apply(this, arguments), oldClasses, oldClassUnparsed;
 
                     var cleanup = pluginOptions.applyClasses && pluginOptions.applyClasses(record, column, function(className) {
                         if(className == oldClassUnparsed) {
