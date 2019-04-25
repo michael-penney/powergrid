@@ -18,8 +18,8 @@
  *              return function() { <<dispose here>> }
  *          },
  *          applyStyles: (record, column, callback) => {
- *              var class = 'css string';
- *              callback(class);
+ *              var styleObject = '{"background-color": "black"}';
+ *              callback(styleObject);
  *
  *              // (Optionally) return a function that will be called when the cell is destroyed. Use this to destroy
  *              // bindings, for example.
