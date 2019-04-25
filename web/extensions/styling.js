@@ -16,6 +16,14 @@
  *              // (Optionally) return a function that will be called when the cell is destroyed. Use this to destroy
  *              // bindings, for example.
  *              return function() { <<dispose here>> }
+ *          },
+ *          applyStyles: (record, column, callback) => {
+ *              var class = 'css string';
+ *              callback(class);
+ *
+ *              // (Optionally) return a function that will be called when the cell is destroyed. Use this to destroy
+ *              // bindings, for example.
+ *              return function() { <<dispose here>> }
  *          }
  *      }
  * }
@@ -29,8 +37,9 @@ define(['../override'], function(override) {
             return {
                 renderCell: function(record, column, rowIdx, columnIdx) {
                     var cell = $super.renderCell.apply(this, arguments),
-                        oldClasses, oldClassUnparsed;
-                    var cleanup = pluginOptions.applyClasses(record, column, function(className) {
+                        oldClasses, oldClassUnparsed, oldStyles;
+
+                    var cleanup = pluginOptions.applyClasses && pluginOptions.applyClasses(record, column, function(className) {
                         if(className == oldClassUnparsed) {
                             return;
                         }
@@ -38,16 +47,25 @@ define(['../override'], function(override) {
                         if(oldClasses) {
                             currentClasses = currentClasses.split(whitespace).filter(function(e) {
                                 return oldClasses.indexOf(e) == -1;
-                            }).join(" ");
+                            }).join(' ');
                         }
                         if(className) {
-                            cell.className = currentClasses + " " + className;
+                            cell.className = currentClasses + ' ' + className;
                             oldClasses = className.split(whitespace);
                         } else {
                             cell.className = currentClasses;
                             oldClasses = null;
                         }
                         oldClassUnparsed = className;
+                    });
+
+                    var cleanupStyles = pluginOptions.applyStyles && pluginOptions.applyStyles(record, column, function(styles) {
+                        var key;
+                        for (key in styles) {
+                            if (styles[key]) {
+                                cell.style[key] = styles[key];
+                            }
+                        }
                     });
 
                     // TODO handle clean up (remove observers when cell is destroyed)
