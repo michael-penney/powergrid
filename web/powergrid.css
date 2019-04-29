@@ -235,7 +235,7 @@
 }
 
 .pg-group-indicator:before {
-    border-left-color: transparent !important;   
+    border-left-color: transparent !important;
     left: -10px;
 }
 
@@ -676,4 +676,11 @@ ul.pg-menu > li:hover {
     font-weight: bold;
     text-align: center;
     font-size: 15px;
+}
+
+.pg-dropDownList {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    margin-top: -5px;
 }
