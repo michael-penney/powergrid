@@ -6,6 +6,7 @@
     "jquery": "^3.1.0"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "es6-promise": "^3.2.1",
     "jsrender": "^0.9.78",
     "requirejs": "^2.2.0",
@@ -17,12 +18,12 @@
     "registry": "https://nexus.pearlchain.net/repository/npm-internal/"
   },
   "scripts": {
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
-    "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
