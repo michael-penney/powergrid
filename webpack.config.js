@@ -6,12 +6,10 @@ module.exports = {
     devtool: 'source-map',
 
     entry: [
-		'@babel/polyfill',
+        '@babel/polyfill',
 		'./web/main.js'
 	],
-	externals: [nodeExternals({
-        whitelist: ['@babel/polyfill']
-    })],
+	externals: [nodeExternals()],
     module: {
         rules: [
             {
