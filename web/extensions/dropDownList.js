@@ -3,7 +3,7 @@
  * Enabled when column type is 'dropdown'.
  * Represents a list of values depends from column name or column id
  *
- * @option getOptionsForColumn(name, index) => string[]
+ * @option getOptionsForColumn(name, index) => [{ label: string, value: string }, ...]
  * @option showEmptyOption(name, index) => boolean
  * name - it's column name
  * index - it's column index
@@ -63,8 +63,8 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             // render options
                             options.getOptionsForColumn && options.getOptionsForColumn(column._key, column.key).forEach(function(element) {
                                 let option = document.createElement('option');
-                                option.setAttribute('value', element);
-                                option.textContent = element;
+                                option.setAttribute('value', element.value);
+                                option.textContent = element.label;
                                 if (element === value) option.setAttribute('selected', 'true');
                                 dropDownList.appendChild(option);
                             });
