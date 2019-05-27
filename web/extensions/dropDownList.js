@@ -51,7 +51,7 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
-                            options.showEmptyOption && options.showEmptyOption(column._key, column.key) {
+                            if (options.showEmptyOption && options.showEmptyOption(column._key, column.key)) {
                                 // render empty option
                                 let option = document.createElement('option');
                                 option.setAttribute('value', undefined);
