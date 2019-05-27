@@ -1,10 +1,11 @@
 /***
  * dropDownList extension.
- * Enabled when column type is 'DROP_DOWN_LIST'.
- * Represents a list of values.
+ * Enabled when column type is 'dropdown'.
+ * Represents a list of values depends from columnId
  *
- * @option dataList
- *
+ * @option getOptionsForColumn(name, index) => string[]
+ * name - it's column name
+ * index - it's column index
  */
 
 define(['../override', 'jquery', '../utils'], function(override, $, utils) {
@@ -12,11 +13,10 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
     return {
         loadFirst: ['directinput'],
         init: function(grid, options) {
-            const dataList = options.dataList;
             override(grid, function($super) {
                 return {
                     renderCellContent: function(record, column, value) {
-                        const isDropDownListCol = column.type === 'DROP_DOWN_LIST';
+                        const isDropDownListCol = column.type === 'dropdown';
                         if(!isDropDownListCol) {
                             return $super.renderCellContent(record, column, value);
                         }
@@ -46,23 +46,25 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             let cellContent = document.createElement('div');
                             let value = utils.getValue(record, column.key);
 
-                            if (value === undefined) {
-                                return cellContent;
-                            }
-
                             let dropDownList = document.createElement('select');
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
-                            if (dataList) {
-                                dataList.forEach(function(element) {
-                                    let option = document.createElement('option');
-                                    option.setAttribute('value', element);
-                                    option.textContent = element;
-                                    if (element === value) option.setAttribute('selected', 'true');
-                                    dropDownList.appendChild(option);
-                                });
-                            }
+                            // render empty option
+                            let option = document.createElement('option');
+                            option.setAttribute('value', undefined);
+                            option.textContent = '---';
+                            if (!value) option.setAttribute('selected', 'true');
+                            dropDownList.appendChild(option);
+
+                            // render options
+                            options.getOptionsForColumn && options.getOptionsForColumn(column._key, column.key).forEach(function(element) {
+                                let option = document.createElement('option');
+                                option.setAttribute('value', element);
+                                option.textContent = element;
+                                if (element === value) option.setAttribute('selected', 'true');
+                                dropDownList.appendChild(option);
+                            });
 
                             cellContent.appendChild(dropDownList);
                             return cellContent;
