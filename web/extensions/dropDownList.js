@@ -1,7 +1,7 @@
 /***
  * dropDownList extension.
  * Enabled when column type is 'dropdown'.
- * Represents a list of values depends from columnId
+ * Represents a list of values depends from column name or column id
  *
  * @option getOptionsForColumn(name, index) => string[]
  * name - it's column name
