@@ -4,6 +4,7 @@
  * Represents a list of values depends from column name or column id
  *
  * @option getOptionsForColumn(name, index) => string[]
+ * @option showEmptyOption(name, index) => boolean
  * name - it's column name
  * index - it's column index
  */
@@ -50,12 +51,14 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
-                            // render empty option
-                            let option = document.createElement('option');
-                            option.setAttribute('value', undefined);
-                            option.textContent = '---';
-                            if (!value) option.setAttribute('selected', 'true');
-                            dropDownList.appendChild(option);
+                            options.showEmptyOption && options.showEmptyOption(column._key, column.key) {
+                                // render empty option
+                                let option = document.createElement('option');
+                                option.setAttribute('value', undefined);
+                                option.textContent = '---';
+                                if (!value) option.setAttribute('selected', 'true');
+                                dropDownList.appendChild(option);
+                            }
 
                             // render options
                             options.getOptionsForColumn && options.getOptionsForColumn(column._key, column.key).forEach(function(element) {
