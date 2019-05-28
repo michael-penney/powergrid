@@ -47,6 +47,11 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             let cellContent = document.createElement('div');
                             let value = utils.getValue(record, column.key);
 
+                            // FIXME a hack for tree-grid extension
+                            if (value === undefined) {
+                                return cellContent;
+                            }
+
                             let dropDownList = document.createElement('select');
                             dropDownList.setAttribute('id', utils.getValue(record, 0) + '-key-' + column.key);
                             dropDownList.setAttribute('class', 'pg-dropDownList');
@@ -56,7 +61,7 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                                 let option = document.createElement('option');
                                 option.setAttribute('value', undefined);
                                 option.textContent = '---';
-                                if (!value) option.setAttribute('selected', 'true');
+                                if (value === "") option.setAttribute('selected', 'true');
                                 dropDownList.appendChild(option);
                             }
 
