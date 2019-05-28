@@ -39,12 +39,10 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             let cell = $(this).parents('.pg-cell:eq(0)'),
                                 row = cell.parents('.pg-row:eq(0)'),
                                 key = cell.attr('data-column-key'),
-                                rowId = row.data('row-id');
+                                rowId = row.data('row-id'),
+                                value = cell.find('select option:selected').val();
 
-                            let listId = rowId + '-key-' + key;
-                            let val = $('#' + listId + ' option:selected').text();
-
-                            grid.dataSource.setValue(rowId, key, val);
+                            grid.dataSource.setValue(rowId, key, value);
                         });
                     },
 
