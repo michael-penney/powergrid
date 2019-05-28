@@ -6,9 +6,7 @@
  * !NOTE In the case when value of a cell is undefined, it has to be replaced with "", otherwise the cell will be
  * displayed as is, without dropdown field.
  *
- * @option getOptionsForColumn(name, index) => [{ label: string, value: string }, ...]
- * name - it's column name
- * index - it's column index
+ * @option getOptions(record, column) => [{ label: string, value: string }, ...]
  */
 
 define(['../override', 'jquery', '../utils'], function(override, $, utils) {
@@ -67,7 +65,7 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                             dropDownList.setAttribute('class', 'pg-dropDownList');
 
                             // render options
-                            options.getOptionsForColumn && options.getOptionsForColumn(column._key, column.key).forEach(function(element) {
+                            options.getOptions && options.getOptions(record, column).forEach(function(element) {
                                 let option = document.createElement('option');
 
                                 option.setAttribute('value', element.value);
