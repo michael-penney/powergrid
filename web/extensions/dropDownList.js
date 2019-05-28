@@ -3,6 +3,9 @@
  * Enabled when column type is 'dropdown'.
  * Represents a list of values depends from column name or column id
  *
+ * !NOTE In the case when value of a cell is undefined, it has to be replaced with "", otherwise the cell will be
+ * displayed as is, without dropdown field.
+ *
  * @option getOptionsForColumn(name, index) => [{ label: string, value: string }, ...]
  * @option showEmptyOption(name, index) => boolean
  * name - it's column name
