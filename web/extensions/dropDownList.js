@@ -65,7 +65,7 @@ define(['../override', 'jquery', '../utils'], function(override, $, utils) {
                                 let option = document.createElement('option');
                                 option.setAttribute('value', element.value);
                                 option.textContent = element.label;
-                                if (element === value) option.setAttribute('selected', 'true');
+                                if (element.value === value) option.setAttribute('selected', 'true');
                                 dropDownList.appendChild(option);
                             });
 
