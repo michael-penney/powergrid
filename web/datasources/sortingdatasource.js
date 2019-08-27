@@ -11,7 +11,15 @@ define(['util', 'jquery'], function(util, $) {
             self.reload();
             $(self).trigger("dataloaded");
         }).on("datachanged", function(event, data) {
+            if (data.oldData) {
+                data.oldData = self.view;
+            }
+
             self.reload();
+            if (data.data) {
+                data.data = self.view;
+            }
+            
             $(self).trigger("datachanged", [data]);
         });
 
